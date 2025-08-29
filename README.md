@@ -11,9 +11,9 @@ This application automatically executes the assessment requirements on startup:
 3. **Submit Solution**: POST to webhook URL with JWT authorization
 
 **Registration Details:**
-- Name: John Doe  
-- Registration Number: REG1613 (ends in 13 → odd → Question 1)
-- Email: john@example.com
+- Name: J Kishore Kumar   
+- Registration Number: 22BCE1613 (ends in 13 → odd → Question 1)
+- Email: kishore@example.com
 
 ## SQL Solution (Question 1)
 
