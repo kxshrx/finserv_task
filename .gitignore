@@ -44,3 +44,7 @@ application-*.properties
 application-*.yml
 !application.properties
 !application.yml
+
+# Allow JAR files in releases directory
+*.jar
+!releases/*.jar
