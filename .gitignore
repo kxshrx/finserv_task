@@ -48,3 +48,4 @@ application-*.yml
 # Allow JAR files in releases directory
 *.jar
 !releases/*.jar
+question/
