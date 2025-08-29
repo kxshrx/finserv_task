@@ -16,14 +16,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-/**
- * Service class for handling HTTP operations for webhook tasks
- */
 @Service
 public class WebhookService {
     
     private static final Logger logger = LoggerFactory.getLogger(WebhookService.class);
-    
     private static final String REGISTRATION_URL = "https://bfhldevapigw.healthrx.co.in/hiring/generateWebhook/JAVA";
     
     @Autowired
@@ -32,26 +28,16 @@ public class WebhookService {
     @Autowired
     private WebClient webClient;
     
-    /**
-     * Sends registration request to get webhook URL and access token
-     * 
-     * @param request Registration request containing name, regNo, and email
-     * @return RegistrationResponse containing webhook URL and access token
-     * @throws Exception if the request fails
-     */
     public RegistrationResponse registerAndGetWebhook(RegistrationRequest request) throws Exception {
         logger.info("Sending registration request to: {}", REGISTRATION_URL);
         logger.debug("Registration payload: {}", request);
         
         try {
-            // Prepare headers
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             
-            // Create HTTP entity with request body and headers
             HttpEntity<RegistrationRequest> entity = new HttpEntity<>(request, headers);
             
-            // Send POST request
             ResponseEntity<RegistrationResponse> response = restTemplate.exchange(
                 REGISTRATION_URL,
                 HttpMethod.POST,
@@ -75,29 +61,17 @@ public class WebhookService {
         }
     }
     
-    /**
-     * Sends final query to the webhook URL with authorization
-     * 
-     * @param webhookUrl The webhook URL to send the query to
-     * @param accessToken The JWT access token for authorization
-     * @param queryRequest The query request containing the SQL query
-     * @return Response from the webhook
-     * @throws Exception if the request fails
-     */
     public String sendQueryToWebhook(String webhookUrl, String accessToken, QueryRequest queryRequest) throws Exception {
         logger.info("Sending query to webhook URL: {}", webhookUrl);
         logger.debug("Query payload: {}", queryRequest);
         
         try {
-            // Prepare headers with authorization
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setBearerAuth(accessToken);
             
-            // Create HTTP entity
             HttpEntity<QueryRequest> entity = new HttpEntity<>(queryRequest, headers);
             
-            // Send POST request
             ResponseEntity<String> response = restTemplate.exchange(
                 webhookUrl,
                 HttpMethod.POST,
@@ -116,7 +90,6 @@ public class WebhookService {
             
         } catch (org.springframework.web.client.HttpClientErrorException e) {
             if (e.getStatusCode().value() == 401) {
-                // Handle 401 as expected behavior for testing
                 logger.info("Received 401 Unauthorized - this may be expected behavior for testing purposes");
                 logger.info("Query was successfully sent with proper authorization headers");
                 logger.info("Application workflow completed successfully");
@@ -131,14 +104,6 @@ public class WebhookService {
         }
     }
     
-    /**
-     * Alternative implementation using WebClient for reactive programming
-     * 
-     * @param webhookUrl The webhook URL
-     * @param accessToken The access token
-     * @param queryRequest The query request
-     * @return Mono containing the response
-     */
     public Mono<String> sendQueryToWebhookReactive(String webhookUrl, String accessToken, QueryRequest queryRequest) {
         logger.info("Sending query to webhook URL using WebClient: {}", webhookUrl);
         

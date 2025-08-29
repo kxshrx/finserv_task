@@ -2,9 +2,6 @@ package com.finserv.webhooktask.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Data Transfer Object for the final query request sent to the webhook
- */
 public class QueryRequest {
     
     @JsonProperty("finalQuery")
@@ -16,7 +13,6 @@ public class QueryRequest {
         this.finalQuery = finalQuery;
     }
     
-    // Getters and Setters
     public String getFinalQuery() {
         return finalQuery;
     }

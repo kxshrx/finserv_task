@@ -2,9 +2,6 @@ package com.finserv.webhooktask.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Data Transfer Object for the initial registration request
- */
 public class RegistrationRequest {
     
     @JsonProperty("name")
@@ -24,7 +21,6 @@ public class RegistrationRequest {
         this.email = email;
     }
     
-    // Getters and Setters
     public String getName() {
         return name;
     }
