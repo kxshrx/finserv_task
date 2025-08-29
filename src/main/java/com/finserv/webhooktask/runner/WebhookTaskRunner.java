@@ -38,9 +38,9 @@ public class WebhookTaskRunner implements CommandLineRunner {
         try {
             logger.info("Step 1: Registering and getting webhook details...");
             RegistrationRequest registrationRequest = new RegistrationRequest(
-                "John Doe",
-                "REG1613", 
-                "john@example.com"
+                "Kishore Kumar",
+                "22BCE1613", 
+                "kishoren@example.com"
             );
             
             RegistrationResponse registrationResponse = webhookService.registerAndGetWebhook(registrationRequest);
