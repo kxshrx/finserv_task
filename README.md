@@ -1,14 +1,20 @@
-# Webhook Task Application
+# Bajaj Finserv Health | Qualifier 1 | JAVA - Spring Boot Webhook Application
 
-This Spring Boot application automatically executes a webhook flow on startup without requiring any REST controllers or user interaction.
+This Spring Boot application implements the complete assessment workflow as specified in the Bajaj Finserv Health hiring challenge.
 
-## Overview
+## Task Implementation
 
-The application performs the following steps automatically on startup:
+The application automatically executes the following workflow on startup without any REST controllers or user interaction:
 
-1. **Registration**: Sends a POST request to `https://bfhldevapigw.healthrx.co.in/hiring/generateWebhook/JAVA` with user details
-2. **Query Generation**: Based on registration number REG1613 (ending in 13 - odd), generates SQL query for Question 1
-3. **Webhook Submission**: Sends the generated SQL query to the received webhook URL with JWT authorization
+1. **Generate Webhook**: Sends POST request to `https://bfhldevapigw.healthrx.co.in/hiring/generateWebhook/JAVA`
+2. **Solve SQL Problem**: Based on registration number ending (odd/even), generates the appropriate SQL query
+3. **Submit Solution**: Sends the final SQL query to the webhook URL using JWT token authorization
+
+## Registration Details
+
+- **Name**: John Doe
+- **Registration Number**: REG1613 (ending in 13 - odd → Question 1)
+- **Email**: john@example.com
 
 ## SQL Query (Question 1)
 
@@ -33,26 +39,38 @@ This query finds the highest salary credited to an employee, excluding payments 
 - Employee's age (calculated from DOB)
 - Department name
 
-## Building and Running
+## Quick Start
 
-### Prerequisites
-- Java 17 or higher
-- Maven 3.6 or higher
-
-### Build the Application
+### Download and Run (Recommended)
 ```bash
-mvn clean package
+# Download the JAR directly
+wget https://github.com/kxshrx/finserv_task/raw/main/releases/webhook-task-1.0.0.jar
+
+# Run the application
+java -jar webhook-task-1.0.0.jar
 ```
 
-### Run the Application
+### Build from Source
 ```bash
+# Clone the repository
+git clone https://github.com/kxshrx/finserv_task.git
+cd finserv_task
+
+# Build the application
+mvn clean package
+
+# Run the application
 java -jar target/webhook-task-1.0.0.jar
 ```
 
-Or using Maven:
-```bash
-mvn spring-boot:run
-```
+## Assessment Compliance
+
+✅ **Spring Boot Application**: Built with Spring Boot 3.2.0  
+✅ **Automatic Startup**: Runs without controllers using CommandLineRunner  
+✅ **RestTemplate/WebClient**: Uses both for HTTP requests  
+✅ **JWT Authorization**: Implements Bearer token authentication  
+✅ **Public GitHub Repository**: Available at https://github.com/kxshrx/finserv_task  
+✅ **Downloadable JAR**: https://github.com/kxshrx/finserv_task/raw/main/releases/webhook-task-1.0.0.jar
 
 ## Project Structure
 
@@ -102,13 +120,25 @@ The application can be configured through `application.properties`:
 - Server configuration (if needed)
 - Management endpoints
 
-## Error Handling
+## Submission Checklist
 
-The application includes comprehensive error handling:
-- Network connectivity issues
-- Invalid responses
-- Authentication failures
-- Malformed JSON
-- HTTP status code validation
+### ✅ Required Components
 
-If any step fails, the application will log the error and terminate, ensuring that startup failures are properly reported.
+1. **Public GitHub Repository**: https://github.com/kxshrx/finserv_task
+2. **Source Code**: Complete Spring Boot application with all required files
+3. **Final JAR Output**: Available in releases directory
+4. **RAW Downloadable JAR Link**: https://github.com/kxshrx/finserv_task/raw/main/releases/webhook-task-1.0.0.jar
+
+### 📝 Assessment Requirements Met
+
+- ✅ Spring Boot application with RestTemplate/WebClient
+- ✅ No controllers - uses CommandLineRunner for startup execution
+- ✅ JWT token in Authorization header
+- ✅ Complete workflow: Generate Webhook → Solve SQL → Submit Solution
+- ✅ Handles odd registration number (Question 1)
+- ✅ Production-ready JAR file
+
+### 🔗 Submit Here
+**Assessment Form**: https://forms.office.com/r/5Kzb1h7fre
+
+**Repository Format**: `https://github.com/kxshrx/finserv_task.git`
